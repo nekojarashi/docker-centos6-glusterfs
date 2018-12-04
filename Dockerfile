@@ -2,8 +2,9 @@ FROM centos:centos6
 LABEL maintainer="y-okubo"
 
 ADD ./glusterd.sh /
-
 RUN chmod +x /glusterd.sh \
- && yum update -y \
- && yum -y install acl centos-release-gluster312 glusterfs-server
+ && yum -y update \
+ && yum -y install acl \
+ && yum -y install centos-release-gluster312 \
+ && yum -y install glusterfs-server
 CMD ["/glusterd.sh"]
