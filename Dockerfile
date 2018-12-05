@@ -1,10 +1,13 @@
 FROM centos:centos6
 LABEL maintainer="y-okubo"
 
-ADD ./glusterd.sh /
-RUN chmod +x /glusterd.sh \
- && yum -y update \
+RUN yum -y update \
  && yum -y install acl \
  && yum -y install centos-release-gluster312 \
  && yum -y install glusterfs-server
-CMD ["/glusterd.sh"]
+
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD ["tail", "-f", "/dev/null"]

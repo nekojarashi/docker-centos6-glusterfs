@@ -2,4 +2,4 @@
 
 service glusterd start
 
-exec tail -f /dev/null
+exec "$@"
